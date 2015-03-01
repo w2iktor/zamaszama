@@ -1,11 +1,14 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var zamaszamaApp = angular.module('zamaszamaApp', [
   'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
+  'zamaszamaApp.view1',
+  'zamaszamaApp.view2',
+  'zamaszamaApp.userCreation',
+  'zamaszamaApp.userDetail',
+  'zamaszamaApp.userList',
+  'zamaszamaApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/view1'});
