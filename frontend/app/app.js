@@ -8,7 +8,8 @@ var zamaszamaApp = angular.module('zamaszamaApp', [
   'zamaszamaApp.userCreation',
   'zamaszamaApp.userDetail',
   'zamaszamaApp.userList',
-  'zamaszamaApp.version'
+  'zamaszamaApp.version',
+  'zamaszamaApp.login'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/view1'});
