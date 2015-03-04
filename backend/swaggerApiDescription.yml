@@ -36,17 +36,55 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
+  
 definitions:
   User:
     properties:
-      login:
+      name:
         type: string
-        description: Login.
+        description: Name.
+      email:
+        type: string
+        description: Email. 
       password:
         type: string
-        description: Password.
+        description: Password.        
+      needChangePassword:
+        type: boolean
+        description: Need change password.
+      role:
+        type: string
+        description: Role.
 
+  Order:
+    properties:
+      user:
+        $ref: '#/definitions/User'
+      password:
+        type: string
+        description: Date.  
+      meals:
+        type: array
+        items:
+          $ref: '#/definitions/Meal'
+          minItems: 0
+          uniqueItems: true  
+
+  Meal:
+    properties:
+      type:
+        type: string
+        description: Type.      
+      name:
+        type: string
+        description: Name.   
+      amount:
+        type: string
+        description: Amount.   
+      company:
+        type: string
+        description: Company.           
+        
   Error:
     properties:
       code:
