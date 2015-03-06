@@ -1,0 +1,94 @@
+swagger: '2.0'
+info:
+  title: Zamaszama Api
+  description: The easiest way to order food anywhere you are
+  version: "1.0.0"
+host: zamaszama.com
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /api
+produces:
+  - application/json
+paths:
+  /login:
+    get:
+      summary: User authorization and create token
+      description: |
+        Return token used by the client with each request made to the server. If token is not valid the response will be 401.
+      parameters:
+        - name: user
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - Authentication
+      responses:
+        200:
+          description: Token
+          schema:
+            properties:
+              token:
+                type: string
+                description:  token
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+definitions:
+  User:
+    properties:
+      name:
+        type: string
+        description: Name.
+      email:
+        type: string
+        description: Email. 
+      password:
+        type: string
+        description: Password.        
+      needChangePassword:
+        type: boolean
+        description: Need change password.
+      role:
+        type: string
+        description: Role.
+
+  Order:
+    properties:
+      user:
+        $ref: '#/definitions/User'
+      password:
+        type: string
+        description: Date.  
+      meals:
+        type: array
+        items:
+          $ref: '#/definitions/Meal'
+          minItems: 0
+          uniqueItems: true  
+
+  Meal:
+    properties:
+      type:
+        type: string
+        description: Type.      
+      name:
+        type: string
+        description: Name.   
+      amount:
+        type: string
+        description: Amount.   
+      company:
+        type: string
+        description: Company.           
+        
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
