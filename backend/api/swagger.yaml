@@ -13,21 +13,19 @@ produces:
   - application/json
 paths:
   /login:
+    x-swagger-router-controller: authentication
     post:
+      operationId: login
       summary: User authorization and create token
       description: |
         Return token used by the client with each request made to the server. If token is not valid the response will be 401.
       parameters:
-        - name: login
-          in: query
+        - name: credencials
+          in: body
           description: User login
           required: true
-          type: string
-        - name: password
-          in: query
-          description: User password
-          required: true
-          type: string
+          schema:
+            $ref: '#/definitions/Credencial'
       tags:
         - Authentication
       responses:
@@ -56,6 +54,17 @@ paths:
         - User order
     
 definitions:
+  Credencial:
+    required:
+      - login
+      - password
+    properties:
+      login: 
+        type: string
+        desciption: Login
+      password: 
+        type: string
+        description: Password
   UserSessionInfo:
     properties:
       name: 

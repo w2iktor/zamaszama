@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.12.0",
+    "debug": "~2.1.1",
+    "express": "~4.12.0",
+    "bcryptjs": "~2.0.2",
+    "body-parser": "~1.10.2",
+    "compression": "^1.4.0",
+    "response-time": "~2.0.1",
+    "express": "~4.11.1",
+    "express-jwt": "^0.3.1",
+    "express-unless": "*",
+    "jsonwebtoken": "^0.4.1",
+    "lodash": "~2.4.1",
+    "mongoose": "~3.8.21",
+    "nconf": "*",
+    "redis": "^0.12.1",
+    "require-directory": "^2.0.0",
+    "requirefrom": "^0.2.0",
+    "winston": "*",
+    "js-yaml": "^3.2.7",
+    "swagger-tools": "*"
+  }
+}
