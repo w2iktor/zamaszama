@@ -12,6 +12,7 @@ basePath: /api
 produces:
   - application/json
 paths:
+
   /login:
     x-swagger-router-controller: authentication
     post:
@@ -37,6 +38,52 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+
+  /logout:
+    get:
+      operationId: logout
+      summary: Close the user session. Invalidate token
+      description: Session saved on server side will be removed. Token will be no longer valid.
+      tags:
+        - Authentication
+      responses:
+        200:
+          description: Successful logout.
+          schema:
+            properties:
+              message:
+                type: string
+                description: User has been successfully logged out
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /password:
+      put:
+        summary: Update password of current user
+        description: |
+          Update password of current user.
+        parameters:
+          - name: password
+            in: body
+            description: User password
+            required: true
+            schema:
+              properties:
+                password:
+                  type: string
+                  description: New user password.
+        tags:
+          - Authentication
+        responses:
+          200:
+            description: Successful request.
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'
+
   /currentOrder:
     get:
       summary: Retrive users current order
@@ -50,30 +97,405 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-      tags: 
+      tags:
         - User order
-    
+    post:
+      summary: Create current user order
+      description: |
+        Create current user order if such order do not exists.
+      parameters:
+        - name: order
+          in: body
+          description: User order
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Create current user order
+      description: |
+        Update current user order if such order exists.
+      parameters:
+        - name: order
+          in: body
+          description: User order
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete current user order
+      description: |
+        Delete current user order if such exists.
+      parameters:
+        - name: order
+          in: body
+          description: User order
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /admin/users:
+    get:
+      summary: Retrive all system users
+      description: Retrive users saved in database
+      responses:
+        200:
+          description: List of current users
+          schema:
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/definitions/User'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+            tags:
+              - Users
+              - Admin
+    post:
+      summary: Create new user
+      description: |
+        Create new user.
+      parameters:
+        - name: user
+          in: body
+          description: User data
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - Users
+        - Admin
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Update existing user
+      description: |
+        Update user data.
+      parameters:
+        - name: user
+          in: body
+          description: User data
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - Users
+        - Admin
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete existing user
+      description: |
+        Delete user data.
+      parameters:
+        - name: user
+          in: body
+          description: User data
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - Users
+        - Admin
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /admin/users/{email}/password:
+      put:
+        summary: Update password of user with specific email
+        description: |
+          Update password of user with email given as apram.
+        parameters:
+          - name: password
+            in: body
+            description: User password
+            required: true
+            schema:
+              properties:
+                password:
+                  type: string
+                  description: New user password.
+          - name: email
+            in: path
+            required: true
+            type: string
+        tags:
+          - Authentication
+          - Admin
+        responses:
+          200:
+            description: Successful request.
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'
+
+  /admin/users/{email}/currentOrder:
+    get:
+      summary: Retrive user current order
+      description: Retrive users current order
+      parameters:
+        - name: email
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: User current order
+          schema:
+            $ref: '#/definitions/Order'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User order
+    post:
+      summary: Create current user order
+      description: |
+        Create current user order if such order do not exists.
+      parameters:
+        - name: order
+          in: body
+          description: User order
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+        - name: email
+          in: path
+          required: true
+          type: string
+      tags:
+        - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Create current user order
+      description: |
+        Update current user order if such order exists.
+      parameters:
+        - name: order
+          in: body
+          description: User order
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+        - name: email
+          in: path
+          required: true
+          type: string
+      tags:
+        - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete current user order
+      description: |
+        Delete current user order if such exists.
+      parameters:
+        - name: order
+          in: body
+          description: User order
+          required: true
+          schema:
+            $ref: '#/definitions/Order'
+        - name: email
+          in: path
+          required: true
+          type: string
+      tags:
+        - User order
+        - Admin
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /admin/users/{email}/orders:
+    get:
+      summary: Retrive all orders of the user
+      description: Retrive all orders for user with given email
+      parameters:
+        - name: email
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: List of all user orders
+          schema:
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/definitions/Order'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+            tags:
+              - User order
+              - Admin
+
+  /admin/users/{date}/summary:
+    get:
+      summary: Retrive summary of orders from specific date
+      description: Retrive summary of orders for specific date. The orders will be aggregated by meal name and type in order to help order food via phone.
+      parameters:
+        - name: date
+          in: path
+          required: true
+          type: string
+          format: date
+      responses:
+        200:
+          description: List of orders for specific date
+          schema:
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/definitions/Order'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+            tags:
+              - User order
+              - Admin
+
+  /admin/users/{date}:
+    get:
+      summary: Retrive orders from specific date
+      description: Retrive orders for specific date
+      parameters:
+        - name: date
+          in: path
+          required: true
+          type: string
+          format: date
+      responses:
+        200:
+          description: List of orders for specific date
+          schema:
+            properties:
+              users:
+                type: array
+                items:
+                  $ref: '#/definitions/Order'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+            tags:
+              - User order
+              - Admin
+
+  /admin/orders/lock:
+    post:
+      operationId: ordersLock
+      summary: Lock ordering food
+      description: |
+        This action will disallow to order food for current day. The purpose of this action is to disable food ordering when the order time is out.
+      tags:
+        - Admin
+        - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
 definitions:
+
   Credencial:
     required:
       - login
       - password
     properties:
-      login: 
+      login:
         type: string
         desciption: Login
-      password: 
+      password:
         type: string
         description: Password
+
   UserSessionInfo:
     properties:
-      name: 
+      name:
         type: string
         desciption: Logged user name
-      email: 
+      email:
         type: string
         description: Email
-      role: 
+      role:
         type: string
         enum:
           - USER
@@ -85,6 +507,7 @@ definitions:
       needChangePassword:
         type: boolean
         description: Need change password
+
   User:
     properties:
       name:
@@ -92,39 +515,40 @@ definitions:
         description: Name.
       email:
         type: string
-        description: Email.       
+        description: Email.
       needChangePassword:
         type: boolean
         description: Need change password.
+
   Order:
     properties:
       user:
         $ref: '#/definitions/User'
       date:
         type: string
-        description: Date.  
+        description: Date.
       meals:
         type: array
         items:
           $ref: '#/definitions/Meal'
           minItems: 0
-          uniqueItems: true  
+          uniqueItems: true
 
   Meal:
     properties:
       type:
         type: string
-        description: Type.      
+        description: Type.
       name:
         type: string
-        description: Name.   
+        description: Name.
       amount:
         type: string
-        description: Amount.   
+        description: Amount.
       company:
         type: string
-        description: Company.           
-        
+        description: Company.
+
   Error:
     properties:
       code:
