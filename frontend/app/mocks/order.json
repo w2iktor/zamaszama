@@ -1,0 +1,22 @@
+{
+  "user": {
+    "name": "test1",
+    "email": "test@test.pl",
+    "needChangePassword": true
+  },
+  "date": "11-11-2014",
+  "meals": [
+    {
+      "type": "meat",
+      "name": "chicken",
+      "amount": 4,
+      "company": "KFC"
+    },
+    {
+      "type": "meat",
+      "name": "burger",
+      "amount": 1,
+      "company": "KFC"
+    }
+  ]
+}

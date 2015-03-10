@@ -21,5 +21,5 @@ angular.module('zamaszamaApp.userDetail', ['ngRoute', 'ngResource'])
         $location.path('/userList');
       };
 
-      $scope.user = UserFactory.show({login: $routeParams.login});
+      $scope.user = UserFactory.show({login: $routeParams.email});
     });

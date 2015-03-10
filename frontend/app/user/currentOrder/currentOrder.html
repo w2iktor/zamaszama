@@ -1,0 +1,11 @@
+<div class="span6">
+    Order for date {{order.date}}
+        <div ng-repeat="meal in order.meals">
+            <span>{{ meal.type }}</span>
+            <span>{{ meal.name }}</span>
+            <span>{{ meal.company }}</span>
+            <span><input type="text" ng-model="meal.amount"/></span>
+        </div>
+    <a ng-click="order()" class="btn btn-small">send order</a>
+    <a ng-click="removeOrder()" class="btn btn-small">delete order</a>
+</div>

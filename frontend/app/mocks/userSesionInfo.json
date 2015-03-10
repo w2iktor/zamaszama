@@ -1,5 +1,7 @@
 {
   "name": "test1",
   "email": "test@test.pl",
+  "role": "USER",
+  "token": "342424242342423424",
   "needChangePassword": true
 }

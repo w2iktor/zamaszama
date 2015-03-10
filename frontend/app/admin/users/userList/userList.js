@@ -10,12 +10,12 @@ angular.module('zamaszamaApp.userList', ['ngRoute', 'ngResource'])
     }])
 
 .controller('UserListController', function ($scope, UsersFactory, UserFactory, $location) {
-      $scope.editUser = function (login) {
-        $location.path('/userDetail/' + login);
+      $scope.editUser = function (email) {
+        $location.path('/userDetail').search({email: email});
       };
 
-      $scope.deleteUser = function (login) {
-        UserFactory.delete({login: login}, function () {
+      $scope.deleteUser = function (email) {
+        UserFactory.delete({login: email}, function () {
           $scope.users = UsersFactory.query();
         });
       };
