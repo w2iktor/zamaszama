@@ -1,6 +1,6 @@
 var mongoose 		= require('mongoose');
 var libs            = require('requirefrom')('libs');
-var log 			= libs('log')(module);
+var log 			= libs('log').getLogger(module);
 var config 			= libs('config');
 
 //connect to MongoDB and load all models

@@ -3,7 +3,7 @@ var bodyParser 			= require('body-parser');
 var unless 				= require('express-unless');
 var jwt 				= require("express-jwt");
 var requireDirectory 	= require('require-directory');
-var log 				= require('./libs/log')(module);
+var log 				= require('./libs/log').getLogger(module);
 var config 				= require('./libs/config');
 var utils 				= require('./libs/utils.js');
 var loader          	= require('./libs/loader');
@@ -13,7 +13,7 @@ var yaml                = require('js-yaml');
 var fs                  = require('fs');
 var swaggerTools        = require('swagger-tools');
 //var routes 				= requireDirectory(module, './routes');
-
+console.log('test');
 log.debug("Starting application");
 var app = express();
 

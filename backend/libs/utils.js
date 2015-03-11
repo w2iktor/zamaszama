@@ -1,6 +1,6 @@
 "use strict";
 
-var log 			= require('./log')(module);
+var log 			= require('./log').getLogger(module);
 var config 			= require('./config');
 var path = require('path'),
     util = require('util'),
@@ -45,8 +45,6 @@ module.exports.create = function (user, req, res, next) {
 
     var data = {
         _id: user._id,
-        login: user.login,
-        access: user.access,
         name: user.name,
         email: user.email,
         role: user.role,

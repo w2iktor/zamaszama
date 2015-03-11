@@ -1,6 +1,6 @@
 "use strict";
 
-var log 		        	= require('../libs/log')(module);
+var log 		        	= require('../libs/log').getLogger(module);
 var _                       = require("lodash");
 var util                    = require('util');
 var path                    = require('path');
@@ -29,7 +29,7 @@ function login(req, res, next) {
     process.nextTick(function () {
 
         User.findOne({
-            login: login
+            email: login
         }, function (err, user) {
 
             if (err || !user) {
