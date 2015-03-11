@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "user": {
+      "name": "test1",
+      "email": "test@test.pl",
+      "needChangePassword": true
+    },
+    "date": "11-11-2014",
+    "meals": [
+      {
+        "type": "meat",
+        "name": "chicken",
+        "amount": 4,
+        "company": "KFC"
+      },
+      {
+        "type": "meat",
+        "name": "burger",
+        "amount": 1,
+        "company": "KFC"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "user": {
+      "name": "test2",
+      "email": "test2@test.pl",
+      "needChangePassword": false
+    },
+    "date": "01-01-2015",
+    "meals": [
+      {
+        "type": "salad",
+        "name": "tomato with chicken",
+        "amount": 4,
+        "company": "Nudle"
+      },
+      {
+        "type": "salad",
+        "name": "carrot salad",
+        "amount": 5,
+        "company": "Nudle"
+      }
+    ]
+  }
+]
