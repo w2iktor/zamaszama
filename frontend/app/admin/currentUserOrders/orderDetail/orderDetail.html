@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Order detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <span>User name: {{order.user.name}}</span>
+        <span>User email: {{order.user.email}}</span>
+        <div ng-repeat="meal in order.meals">
+            <span>Type: {{meal.type}}</span>
+            <span>Name: {{meal.name}}</span>
+            <span>Amount: <input type="text" ng-model="meal.amount"/></span>
+            <span>Company: {{meal.company}}</span>
+        </div>
+
+
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="updateOrder()" class="btn btn-small btn-primary">update order</a>
+            </div>
+        </div>
+    </form>
+</div>

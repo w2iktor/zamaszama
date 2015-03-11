@@ -1,0 +1,17 @@
+<div class="span6">
+
+    <div ng-repeat="order in orders">
+        <span>User name: {{ order.user.name }}</span>
+        <span>User email: {{ order.user.email }}</span>
+        <div ng-repeat="meal in orders.meals">
+            <span>Type: {{ meal.type }}</span>
+            <span>Name: {{ meal.name }}</span>
+            <span>Amount: {{ meal.amount }}</span>
+            <span>Company: {{ meal.company }}</span>
+        </div>
+
+        <a ng-click="editOrder(order.id)" class="btn btn-small btn-primary">edit</a>
+        <a ng-click="deleteOrder(order.id)" class="btn btn-small btn-danger">delete</a>
+    </div>
+    <a ng-click="createNewOrder()" class="btn btn-small">create new order</a>
+</div>

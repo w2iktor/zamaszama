@@ -10,7 +10,17 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
     }])
 
 .controller('UserCurrentOrderController', function ($scope, UserCurrentOrderFactory, $location) {
-      $scope.order = function () {
+      $scope.sendOrder = function () {
+
+          var choosenMeals = [];
+          angular.forEach($scope.order.meals, function(value, key) {
+              if(value.amount > 0){
+                  choosenMeals.push(value);
+              }
+              console.log(choosenMeals);
+          });
+          $scope.order.meals = choosenMeals;
+
           UserCurrentOrderFactory.create($scope.order, function () {
           });
       };
