@@ -31,8 +31,8 @@ var jwtCheck = jwt({
   secret: config.get('token:secret')
 });
 jwtCheck.unless = unless;
-app.use(jwtCheck.unless({path: '/api/login' }));
-app.use(utils.middleware().unless({path: '/api/login' }));
+app.use('/api', jwtCheck.unless({path: '/api/login' }));
+app.use('/api', utils.middleware().unless({path: '/api/login' }));
 app.use('/api/admin', adminMiddleware.middleware());
 
 // swaggerRouter configuration
@@ -58,13 +58,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 });
-
-
-//routes
-//app.use('/', routes.index);
-//app.use("/api", routes.authentication);
-//app.use('/api/admin/users', routes.users);
-//app.use('/api/comments', routes.comments);
 
 // error handler
 app.use(middlewares.errorMiddleware);
