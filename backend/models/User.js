@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var bcrypt = require("bcryptjs");
 
 var UserSchema = new mongoose.Schema({
-	login: {
+    email: {
         type: String,
         unique: true,
         required: true
@@ -17,10 +17,10 @@ var UserSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	email: {
-		type: String,
-		required: true
-	},
+    needChangePassword: {
+        type: Boolean,
+        default: false
+    },
 	role: {
 		type: String,
 		required: true,
@@ -28,6 +28,12 @@ var UserSchema = new mongoose.Schema({
 		enum: ['USER', 'ADMIN']
 	}
 }, {_id: true});
+
+//Model transformation
+if (!UserSchema.options.toJSON) UserSchema.options.toJSON = {};
+UserSchema.options.toJSON.transform = function (doc, ret, options) {
+    return { name: ret.name, email: ret.email, needChangePassword: ret.needChangePassword }
+};
 
 UserSchema.pre('save', function (next) {
     var user = this;
