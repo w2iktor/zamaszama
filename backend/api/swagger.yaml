@@ -195,7 +195,7 @@ paths:
           description: User data
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/NewUser'
       tags:
         - Users
         - Admin
@@ -209,6 +209,26 @@ paths:
 
   /admin/users/{email}:
     x-swagger-router-controller: user
+    get:
+      operationId: read
+      summary: Retrive user by email
+      description: Retrive user saved in database
+      parameters:
+        - name: email
+          in: path
+          type: string
+      responses:
+        200:
+          description: User object
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Users
+        - Admin
     put:
       operationId: update
       summary: Update existing user
@@ -243,12 +263,6 @@ paths:
         - name: email
           in: path
           type: string
-        - name: user
-          in: body
-          description: User data
-          required: true
-          schema:
-            $ref: '#/definitions/User'
       tags:
         - Users
         - Admin
@@ -522,6 +536,18 @@ definitions:
         type: boolean
         description: Need change password
 
+  NewUser:
+    properties:
+      name:
+        type: string
+        description: Name
+      email:
+        type: string
+        description: Email
+      password: 
+        type: string
+        description: Password
+  
   User:
     properties:
       name:

@@ -12,8 +12,6 @@ var adminMiddleware 	= require('./middlewares/adminAuth.js');
 var yaml                = require('js-yaml');
 var fs                  = require('fs');
 var swaggerTools        = require('swagger-tools');
-//var routes 				= requireDirectory(module, './routes');
-console.log('test');
 log.debug("Starting application");
 var app = express();
 

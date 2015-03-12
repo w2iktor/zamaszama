@@ -11,9 +11,9 @@ exports.list =  function(req, res, next) {
     });
 };
 exports.read =  function(req, res, next) {
-    var userLogin = req.params.login;
-    console.log('Receive request for user: ' + userLogin);
-    service.read(userLogin, function(err, data) {
+    var email = req.swagger.params.email.value;
+    console.log('Receive request for user: ' + email);
+    service.read(email, function(err, data) {
         sendRespond(res, err, data);
     });
 };
@@ -27,17 +27,18 @@ exports.create =  function(req, res, next) {
 };
 
 exports.update=  function(req, res, next) {
-    console.log('Receive request for update user: ');
-    console.dir(req.body);
-    service.update(req.body, function(err, user) {
+    var email = req.swagger.params.email.value;
+    var updatedUserProperties = req.swagger.params.user.value;
+    console.dir(updatedUserProperties);
+    service.update(email, updatedUserProperties, function(err, user) {
         sendRespond(res, err, user);
     });
 };
 
 exports.delete =  function(req, res, next) {
-    var userLogin = req.params.login;
-    service.remove(userLogin, function(err, user) {
-        sendRespond(res, err, "user: " + req.params.login + " deleted successfully");
+    var email = req.swagger.params.email.value;
+    service.remove(email, function(err, user) {
+        sendRespond(res, err, "user: " + email + " deleted successfully");
     });
 };
 

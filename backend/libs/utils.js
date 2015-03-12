@@ -17,7 +17,7 @@ client.on('error', function (err) {
 });
 
 client.on('connect', function () {
-	log.debug("Redis successfully connected");
+	log.info("Redis successfully connected");
 });
 
 module.exports.fetch = function (headers) {
@@ -58,7 +58,7 @@ module.exports.create = function (user, req, res, next) {
     data.token_exp = decoded.exp;
     data.token_iat = decoded.iat;
 
-    log.debug("Token generated for user: %s, token: %s", data.login, data.token);
+    log.debug("Token generated for user: %s, token: %s", data.email, data.token);
 
     client.set(data.token, JSON.stringify(data), function (err, reply) {
         if (err) {
@@ -110,7 +110,7 @@ module.exports.retrieve = function (id, done) {
             });
         } else {
             var data = JSON.parse(reply);
-            log.debug("User data fetched from redis store for user: %s", data.login);
+            log.debug("User data fetched from redis store for user: %s", data.email);
 
             if (_.isEqual(data.token, id)) {
                 return done(null, data);
