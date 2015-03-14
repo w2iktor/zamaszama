@@ -2,13 +2,9 @@
 
 var log 		        	= require('../libs/log').getLogger(module);
 var _                       = require("lodash");
-var util                    = require('util');
 var path                    = require('path');
-var bcrypt                  = require('bcryptjs');
 var utils                   = require("../libs/utils.js");
-var Router                  = require("express").Router;
 var UnauthorizedAccessError = require(path.join(__dirname, "..", "errors", "UnauthorizedAccessError.js"));
-var jwt                     = require("express-jwt");
 var mongoose                = require('mongoose');
 
 var User=mongoose.model('User');
@@ -78,4 +74,4 @@ module.exports = {
     verify: verify
 }
 
-log.debug("Loaded");
+log.debug("Authorization controller loaded");

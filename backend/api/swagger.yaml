@@ -40,6 +40,7 @@ paths:
             $ref: '#/definitions/Error'
 
   /logout:
+    x-swagger-router-controller: authentication
     get:
       operationId: logout
       summary: Close the user session. Invalidate token
