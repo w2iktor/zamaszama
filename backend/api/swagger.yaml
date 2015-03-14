@@ -243,7 +243,7 @@ paths:
           description: User data
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: '#/definitions/UserForUpdate'
       tags:
         - Users
         - Admin
@@ -502,6 +502,24 @@ paths:
             $ref: '#/definitions/Error'
 
 definitions:
+
+  UserForUpdate:
+    properties:
+      name:
+        type: string
+        desciption: Logged user name
+      role:
+        type: string
+        enum:
+          - USER
+          - ADMIN
+        description: user role
+      password:
+        type: string
+        description: password
+      needChangePassword:
+        type: boolean
+        description: Need change password
 
   Credencial:
     required:

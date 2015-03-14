@@ -28,7 +28,7 @@ exports.create = function(userBody, callback) {
         if(err) {
             return callback(err);
         }
-        callback(null, data);update
+        callback(null, data);
     });
 };
 

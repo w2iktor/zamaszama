@@ -1,5 +1,3 @@
-var express = require('express');
-var router = express.Router();
 var services = require('requirefrom')('services');
 var service = services('UserService');
 
@@ -29,6 +27,7 @@ exports.create =  function(req, res, next) {
 exports.update=  function(req, res, next) {
     var email = req.swagger.params.email.value;
     var updatedUserProperties = req.swagger.params.user.value;
+    delete updatedUserProperties.email;
     console.dir(updatedUserProperties);
     service.update(email, updatedUserProperties, function(err, user) {
         sendRespond(res, err, user);
