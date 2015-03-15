@@ -6,6 +6,7 @@ var errorLogger = winston.getExceptionLogger();
 module.exports.errorMiddleware =
     function (err, req, res, next) {
         errorLogger.error(err);
+        console.log(err);
         var errorType = typeof err,
             code = 500,
             msg = {message: "Internal Server Error"};

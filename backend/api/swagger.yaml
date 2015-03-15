@@ -86,7 +86,9 @@ paths:
               $ref: '#/definitions/Error'
 
   /currentOrder:
+    x-swagger-router-controller: UserOrder
     get:
+      operationId: read
       summary: Retrive users current order
       description: Retrive users current order
       responses:
@@ -101,6 +103,7 @@ paths:
       tags:
         - User order
     post:
+      operationId: create
       summary: Create current user order
       description: |
         Create current user order if such order do not exists.
@@ -121,6 +124,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      operationId: update
       summary: Create current user order
       description: |
         Update current user order if such order exists.
@@ -141,6 +145,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      operationId: delete
       summary: Delete current user order
       description: |
         Delete current user order if such exists.
@@ -581,17 +586,30 @@ definitions:
 
   Order:
     properties:
-      user:
-        $ref: '#/definitions/User'
+      userLogin:
+        type: string
+        description: user login
       date:
         type: string
+        format: date
         description: Date.
       meals:
         type: array
         items:
-          $ref: '#/definitions/Meal'
+          $ref: '#/definitions/OrderDetail'
           minItems: 0
           uniqueItems: true
+
+  OrderDetail:
+    required:
+    - amount
+    - meal
+    properties:
+      amount:
+        type: number
+      meal:
+        type: string
+        desription: Meal ID
 
   Meal:
     properties:

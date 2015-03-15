@@ -5,7 +5,7 @@ var jwt 				= require("express-jwt");
 var requireDirectory 	= require('require-directory');
 var log 				= require('./libs/log').getLogger(module);
 var config 				= require('./libs/config');
-var utils 				= require('./libs/utils.js');
+var authentication_utils 				= require('./libs/authentication_utils.js');
 var loader          	= require('./libs/loader');
 var middlewares     	= require('./middlewares/middlewares');
 var adminMiddleware 	= require('./middlewares/adminAuth.js');
@@ -30,7 +30,7 @@ var jwtCheck = jwt({
 });
 jwtCheck.unless = unless;
 app.use('/api', jwtCheck.unless({path: '/api/login' }));
-app.use('/api', utils.middleware().unless({path: '/api/login' }));
+app.use('/api', authentication_utils.middleware().unless({path: '/api/login' }));
 app.use('/api/admin', adminMiddleware.middleware());
 
 // swaggerRouter configuration

@@ -3,7 +3,7 @@
 var log 		        	= require('../libs/log').getLogger(module);
 var _                       = require("lodash");
 var path                    = require('path');
-var utils                   = require("../libs/utils.js");
+var authentication_utils                   = require("../libs/authentication_utils.js");
 var UnauthorizedAccessError = require(path.join(__dirname, "..", "errors", "UnauthorizedAccessError.js"));
 var mongoose                = require('mongoose');
 
@@ -37,7 +37,7 @@ function login(req, res, next) {
             user.comparePassword(password, function (err, isMatch) {
                 if (isMatch && !err) {
                     log.debug("User authenticated, generating token");
-                    utils.create(user, req, res, function(){
+                    authentication_utils.create(user, req, res, function(){
                         return res.status(200).json(req.user);
                     });
                 } else {
@@ -58,7 +58,7 @@ function verify(req, res, next) {
 }
 
 function logout(req, res, next) {
-    if (utils.expire(req.headers)) {
+    if (authentication_utils.expire(req.headers)) {
         delete req.user;
         return res.status(200).json({
             "message": "User has been successfully logged out"
