@@ -11,6 +11,21 @@ function readAll(callback){
     });
 };
 
+function readGivenDate(date, callback) {
+    //console.log('Date: ' + date);
+    var formattedDate = dateUtils.toDate(date);
+    console.log("Formatted date: " + formattedDate);
+    Order.find({bareDate: formattedDate }, function (err, data) {
+        if(err) {
+            return callback(err);
+        }
+        if(data === null){
+            return callback(new Error('No order'));
+        }
+        callback(null, data);
+    });
+};
+
 function read(userEmail, date, callback) {
     //console.log('Date: ' + date);
     var formattedDate = dateUtils.toDate(date);
@@ -20,7 +35,7 @@ function read(userEmail, date, callback) {
             return callback(err);
         }
         if(data === null){
-            return callback(new Error('No order'));
+            return callback(null, 'No order');
         }
         callback(null, data);
     });
@@ -66,6 +81,7 @@ function remove(userEmail,date, callback) {
 
 module.exports = {
     readAll: readAll,
+    readGivenDate: readGivenDate,
     read: read,
     create: create,
     update: update,
