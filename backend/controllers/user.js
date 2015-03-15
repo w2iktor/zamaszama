@@ -49,7 +49,9 @@ function sendRespond(res, err, data){
             message: err
         });
     } else {
-        res.json(data);
+        res.set("Content-type", "application/json; charset=utf-8")
+            .send(JSON.stringify(data, null, 2));
+        //res.json(data);
     }
 }
 
