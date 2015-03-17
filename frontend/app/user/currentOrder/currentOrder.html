@@ -1,11 +1,25 @@
 <div class="span6">
-    Order for date {{order.date}}
-        <div ng-repeat="meal in order.meals">
-            <span>{{ meal.type }}</span>
-            <span>{{ meal.name }}</span>
-            <span>{{ meal.company }}</span>
-            <span><input type="text" ng-model="meal.amount"/></span>
-        </div>
+    <div ng-repeat="menuItem in menu">
+        <span>{{ menuItem.type }}</span>
+
+        <ul>
+            <div ng-repeat="chosen in menuItem.chosen">
+                <li>
+                    {{chosen.name}}
+                    <span><input type="text"  ng-model="chosen.amount"/></span>
+                    <a ng-click="deleteItem($index, menuItem.chosen)" class="btn btn-small">delete item</a>
+                </li>
+            </div>
+        </ul>
+
+
+        <select ng-model="selectedMenuItem" ng-options="item as item.name for item in menuItem.meals">
+            <option value="">Select Items</option>
+        </select>
+        <a ng-click="addItem(selectedMenuItem, menuItem.chosen)" class="btn btn-small">add item</a>
+
+
+    </div>
     <a ng-click="sendOrder()" class="btn btn-small">send order</a>
     <a ng-click="removeOrder()" class="btn btn-small">delete order</a>
 </div>

@@ -12,16 +12,17 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
 .controller('UserCurrentOrderController', function ($scope, UserCurrentOrderFactory, $location) {
       $scope.sendOrder = function () {
 
-          var choosenMeals = [];
-          angular.forEach($scope.order.meals, function(value, key) {
-              if(value.amount > 0){
-                  choosenMeals.push(value);
-              }
-              console.log(choosenMeals);
+          var choosenMeals = {meals:[]};
+          angular.forEach($scope.menu, function(menu, key) {
+              angular.forEach(menu.chosen, function(meal, key) {
+                  if (meal.amount > 0) {
+                      choosenMeals.meals.push(meal);
+                  }
+              });
           });
-          $scope.order.meals = choosenMeals;
+          console.log(angular.toJson(choosenMeals, true));
 
-          UserCurrentOrderFactory.create($scope.order, function () {
+          UserCurrentOrderFactory.create(choosenMeals, function () {
           });
       };
 
@@ -30,5 +31,12 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
           });
       };
 
-        $scope.order = UserCurrentOrderFactory.show();
+        $scope.addItem = function (selectedMenuItem, list) {
+            list.push(selectedMenuItem);
+        };
+
+        $scope.deleteItem = function (selectedMenuItem, list) {
+            list.splice( selectedMenuItem, 1 );
+        };
+        $scope.menu = UserCurrentOrderFactory.show();
     });
