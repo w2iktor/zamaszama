@@ -1,5 +1,11 @@
 <div class="span6">
-    <div ng-repeat="(key, value) in menu.meals | groupBy: 'type'">
+    Add meal to your order:
+    <select ng-model="selectedMenuItem" ng-options="item as item.name for item in menu.meals">
+        <option value="">Select Items</option>
+    </select>
+    <a ng-click="addItem(selectedMenuItem, currentOrder.meals)" class="btn btn-small">add item</a>
+
+    <div ng-repeat="(key, value) in currentOrder.meals | groupBy: 'type'">
         <span> Group name: {{ key }}</span>
 
         <ul>
@@ -7,19 +13,12 @@
                 <li>
                     {{chosen.name}}
                     <span><input type="text"  ng-model="chosen.amount"/></span>
-                    <a ng-click="deleteItem($index, menuItem.chosen)" class="btn btn-small">delete item</a>
+                    <a ng-click="deleteItem($index, currentOrder.meals)" class="btn btn-small">delete item</a>
                 </li>
             </div>
         </ul>
-
-
-        <select ng-model="selectedMenuItem" ng-options="item as item.name for item in menuItem.meals">
-            <option value="">Select Items</option>
-        </select>
-        <a ng-click="addItem(selectedMenuItem, menuItem.chosen)" class="btn btn-small">add item</a>
-
-
     </div>
+    <br/>
     <a ng-click="sendOrder()" class="btn btn-small">send order</a>
     <a ng-click="removeOrder()" class="btn btn-small">delete order</a>
 </div>

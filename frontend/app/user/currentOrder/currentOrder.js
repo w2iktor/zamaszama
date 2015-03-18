@@ -9,7 +9,7 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
       });
     }])
 
-.controller('UserCurrentOrderController', function ($scope, UserCurrentOrderFactory, $location) {
+.controller('UserCurrentOrderController', function ($scope, UserCurrentOrderFactory, UserMenuFactory, $location) {
       $scope.sendOrder = function () {
 
           var choosenMeals = {meals:[]};
@@ -38,5 +38,11 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
         $scope.deleteItem = function (selectedMenuItem, list) {
             list.splice( selectedMenuItem, 1 );
         };
-        $scope.menu = UserCurrentOrderFactory.show();
+        $scope.currentOrder = UserCurrentOrderFactory.show(function(response){
+            debugger;
+            if($scope.currentOrder == "No order"){
+                $scope.currentOrder = {meals:[]}
+            }
+        });
+        $scope.menu = UserMenuFactory.show();
     });
