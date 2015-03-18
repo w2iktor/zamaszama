@@ -1,42 +1,32 @@
-[
-  {
-    "type": "pasta",
-    "chosen": [],
-    "meals": [
-      {
-        "id": 1,
-        "type": "pasta",
-        "name": "chicken",
-        "amount": 0,
-        "company": "Zaświaty"
-      },
-      {
-        "id": 2,
-        "type": "pasta",
-        "name": "tomato",
-        "amount": 0,
-        "company": "Zaświaty"
-      }
-    ]
-  },
-  {
-    "type": "zestaw",
-    "chosen": [],
-    "meals": [
-      {
-        "id": 3,
-        "type": "zestaw",
-        "name": "drugie",
-        "amount": 0,
-        "company": "Zaświaty"
-      },
-      {
-        "id": 4,
-        "type": "zestaw",
-        "name": "zupa",
-        "amount": 0,
-        "company": "Zaświaty"
-      }
-    ]
-  }
-]
+{
+  "meals": [
+    {
+      "id": 1,
+      "type": "pasta",
+      "name": "chicken",
+      "amount": 0,
+      "company": "Zaświaty"
+    },
+    {
+      "id": 2,
+      "type": "pasta",
+      "name": "tomato",
+      "amount": 0,
+      "company": "Zaświaty"
+    },
+    {
+      "id": 3,
+      "type": "zestaw",
+      "name": "drugie",
+      "amount": 0,
+      "company": "Zaświaty"
+    },
+    {
+      "id": 4,
+      "type": "zestaw",
+      "name": "zupa",
+      "amount": 0,
+      "company": "Zaświaty"
+    }
+  ]
+}
