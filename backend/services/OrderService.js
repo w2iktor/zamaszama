@@ -20,7 +20,7 @@ function readGivenDate(date, callback) {
             return callback(err);
         }
         if(data === null){
-            return callback(new Error('No order'));
+            return callback({message: 'No order'});
         }
         callback(null, data);
     });
@@ -35,7 +35,7 @@ function read(userEmail, date, callback) {
             return callback(err);
         }
         if(data === null){
-            return callback(null, 'No order');
+            return callback(null,{message: 'No order'});
         }
         callback(null, data);
     });
@@ -58,7 +58,7 @@ function update(email, date, properties, callback) {
             return callback(err);
         }
         if(doc === null){
-            return callback('There is no order for: ' + email + ' on: ' + date);
+            return callback({message: 'There is no order for: ' + email + ' on: ' + date});
         }
         doc.set(properties);
         doc.save(function (err) {

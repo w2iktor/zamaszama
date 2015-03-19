@@ -44,7 +44,7 @@ OrderSchema.pre('save', function (next) {
     if (this.isModified('date') || this.isNew) {
         var date = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000);
         this.bareDate = dateUtils.toDate(date);
-        console.log('Base date: ' + date);
+        //console.log('Base date: ' + date);
         next();
     } else {
         return next();
