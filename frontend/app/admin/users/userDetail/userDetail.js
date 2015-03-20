@@ -11,7 +11,7 @@ angular.module('zamaszamaApp.userDetail', ['ngRoute', 'ngResource'])
 
 .controller('UserDetailController', function ($scope, $routeParams, UserFactory, $location) {
       $scope.updateUser = function () {
-        UserFactory.update($scope.user, function () {
+        UserFactory.update({email: $routeParams.email}, $scope.userDetails, function () {
           $location.path('/userList');
         });
 
@@ -21,5 +21,5 @@ angular.module('zamaszamaApp.userDetail', ['ngRoute', 'ngResource'])
         $location.path('/userList');
       };
 
-      $scope.user = UserFactory.show({login: $routeParams.email});
+      $scope.userDetails = UserFactory.show({email: $routeParams.email});
     });
