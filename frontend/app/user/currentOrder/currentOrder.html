@@ -12,7 +12,7 @@
             <div ng-repeat="chosen in value">
                 <li>
                     {{chosen.name}}
-                    <span><input type="text"  ng-model="chosen.amount"/></span>
+                    <span><input type="number"  ng-model="chosen.amount"/></span>
                     <a ng-click="deleteItem($index, currentOrder.meals)" class="btn btn-small">delete item</a>
                 </li>
             </div>
