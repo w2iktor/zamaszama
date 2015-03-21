@@ -85,6 +85,125 @@ paths:
             schema:
               $ref: '#/definitions/Error'
 
+  /meals:
+    x-swagger-router-controller: Meal
+    get:
+      operationId: readAllMeals
+      summary: Retrive all meals
+      description: Retrive all meals
+      responses:
+        200:
+          description: List of all meals
+          schema:
+            properties:
+              meals:
+                type: array
+                items:
+                  $ref: '#/definitions/Meal'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+      tags:
+        - Meals
+        
+  /admin/meals:
+    x-swagger-router-controller: Meal
+    get:
+      operationId: readAllMeals
+      summary: Retrive all meals
+      description: Retrive all meals
+      responses:
+        200:
+          description: List of all meals
+          schema:
+            properties:
+              meals:
+                type: array
+                items:
+                  $ref: '#/definitions/Meal'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+      tags:
+        - Meals
+    post:
+      operationId: create
+      summary: Create meal
+      description: Create meal. Meals id is set by application and return in response object
+      parameters:
+        - name: meal
+          in: body
+          description: Meal
+          required: true
+          schema:
+            $ref: '#/definitions/Meal'
+      tags:
+        - Meals
+      responses:
+        200:
+          description: Successful meal create request.
+          schema:
+            $ref: '#/definitions/Meal'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /admin/meals/{mealId}:
+    x-swagger-router-controller: Meal
+    put:
+      operationId: update
+      summary: Update existing meal
+      description: |
+        Update meal data.
+      parameters:
+        - name: mealId
+          in: path
+          type: string
+        - name: meal
+          in: body
+          description: Meal data
+          required: true
+          schema:
+            $ref: '#/definitions/Meal'
+      tags:
+        - Meals
+      responses:
+        200:
+          description: Successful request.
+          schema:
+            $ref: '#/definitions/Meal'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      operationId: delete
+      summary: Delete existing meal
+      description: |
+        Delete meal data.
+      parameters:
+        - name: mealId
+          in: path
+          type: string
+      tags:
+        - Meals
+      responses:
+        200:
+          description: Successful request.
+          schema:
+            $ref: '#/definitions/Meal'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
   /currentOrder:
     x-swagger-router-controller: UserOrder
     get:
@@ -621,12 +740,15 @@ definitions:
       name:
         type: string
         description: Name.
-      amount:
-        type: string
-        description: Amount.
+      price:
+        type: number
+        description: Meal price.
       company:
         type: string
         description: Company.
+      _id:
+        type: string
+        description: Meal id
 
   Error:
     properties:
