@@ -7,9 +7,15 @@ zamaszamaApp.factory('ChangePasswordFactory', function ($resource) {
 });
 
 zamaszamaApp.factory('UserCurrentOrderFactory', function ($resource) {
+    return $resource('http://localhost:port/api/currentOrder', {port: ':3000'}, {
+        show: { method: 'GET', isArray: false },
+        create: { method: 'POST', isArray: false },
+        delete: { method: 'DELETE', isArray: false }
+    })
+});
+
+zamaszamaApp.factory('UserMenuFactory', function ($resource) {
     return $resource('mocks/menu.json', {port: ':3000'}, {
-        show: { method: 'GET', isArray: true },
-        create: { method: 'POST', isArray: true },
-        delete: { method: 'DELETE', isArray: true }
+        show: { method: 'GET', isArray: false }
     })
 });

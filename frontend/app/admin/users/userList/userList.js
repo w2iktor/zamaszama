@@ -15,7 +15,7 @@ angular.module('zamaszamaApp.userList', ['ngRoute', 'ngResource'])
       };
 
       $scope.deleteUser = function (email) {
-        UserFactory.delete({login: email}, function () {
+        UserFactory.delete({email: email}, function () {
           $scope.users = UsersFactory.query();
         });
       };

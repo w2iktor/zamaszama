@@ -1,5 +1,6 @@
 {
   "name": "test1",
   "email": "test@test.pl",
+  "password": "secret",
   "needChangePassword": true
 }

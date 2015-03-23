@@ -18,18 +18,20 @@
 </head>
 <body>
   <ul class="menu">
-    <li><a href="#/userList">userList</a></li>
-    <li><a href="#/userDetail">userDetails</a></li>
-    <li><a href="#/userCreation">createUser</a></li>
+    <li><a href="#/userList">admin userList</a></li>
+    <li><a href="#/userDetail">admin userDetails</a></li>
+    <li><a href="#/userCreation">admin createUser</a></li>
 
-    <li><a href="#/orderList">orderList</a></li>
-    <li><a href="#/orderDetail">orderDetails</a></li>
-    <li><a href="#/orderCreation">createOrder</a></li>
+    <li><a href="#/orderList">admin orderList</a></li>
+    <li><a href="#/orderDetail">admin orderDetails</a></li>
+    <li><a href="#/orderCreation">admin createOrder</a></li>
 
-    <li><a href="#/passwordChange">passwordChange</a></li>
-    <li><a href="#/userCurrentOrder">currentOrder</a></li>
+    <li><a href="#/passwordChange">user passwordChange</a></li>
+    <li><a href="#/userCurrentOrder">user currentOrder</a></li>
 
     <li><a href="#/login">login</a></li>
+    <li><a ng-show="isAuthenticated" ng-click="logout()" href="">Logout</a></li>
+    <li ng-show="isAuthenticated">{{$root.welcome}}</li>
   </ul>
 
   <!--[if lt IE 7]>
@@ -44,6 +46,7 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
 
   <!--Project Configuration-->
   <script src="app.js"></script>

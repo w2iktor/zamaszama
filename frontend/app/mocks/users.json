@@ -2,11 +2,13 @@
   {
     "name": "test1",
     "email": "test@test.pl",
+    "password": "secret",
     "needChangePassword": true
   },
   {
     "name": "test2",
     "email": "test2@test.pl",
+    "password": "secret",
     "needChangePassword": false
   }
 ]

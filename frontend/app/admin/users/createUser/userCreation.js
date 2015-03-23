@@ -9,9 +9,9 @@ angular.module('zamaszamaApp.userCreation', ['ngRoute', 'ngResource'])
   });
 }])
 
-.controller('UserCreationController', function ($scope, $routeParams, UserFactory, $location) {
+.controller('UserCreationController', function ($scope, $routeParams, UsersFactory, $location) {
         $scope.createNewUser = function () {
-            UserFactory.create($scope.user, function () {
+            UsersFactory.create($scope.newUser, function () {
                 $location.path('/userList');
             });
         };
