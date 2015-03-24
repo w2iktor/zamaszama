@@ -1,6 +1,6 @@
 <div class="span6">
     Add meal to your order:
-    <select ng-model="selectedMenuItem" ng-options="item as item.name for item in menu.meals">
+    <select ng-model="selectedMenuItem" ng-options="(meal.name + ' -' + meal.price + 'zł') group by meal.type for meal in menu">
         <option value="">Select Items</option>
     </select>
     <a ng-click="addItem(selectedMenuItem, currentOrder.meals)" class="btn btn-small">add item</a>

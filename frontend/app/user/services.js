@@ -13,9 +13,3 @@ zamaszamaApp.factory('UserCurrentOrderFactory', function ($resource) {
         delete: { method: 'DELETE', isArray: false }
     })
 });
-
-zamaszamaApp.factory('UserMenuFactory', function ($resource) {
-    return $resource('mocks/menu.json', {port: ':3000'}, {
-        show: { method: 'GET', isArray: false }
-    })
-});
