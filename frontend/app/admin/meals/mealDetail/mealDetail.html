@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>Meal detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputType">Type:</label>
+
+            <div class="controls">
+                <input type="text" id="inputType" ng-model="mealDetails.type" placeholder="Type"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputName">Name:</label>
+
+            <div class="controls">
+                <input type="text" id="inputName" ng-model="mealDetails.name" placeholder="Name"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPrice">Price:</label>
+
+            <div class="controls">
+                <input type="number" id="inputPrice" ng-model="mealDetails.price" placeholder="Price"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputCompany">Company:</label>
+
+            <div class="controls">
+                <input type="text" id="inputCompany" ng-model="mealDetails.company" placeholder="Comapny"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="updateMeal()" class="btn btn-small btn-primary">update meal</a>
+            </div>
+        </div>
+    </form>
+</div>
