@@ -8,6 +8,10 @@ var zamaszamaApp = angular.module('zamaszamaApp', [
     'zamaszamaApp.userDetail',
     'zamaszamaApp.userList',
 
+    'zamaszamaApp.mealCreation',
+    'zamaszamaApp.mealDetail',
+    'zamaszamaApp.mealList',
+
     'zamaszamaApp.orderCreation',
     'zamaszamaApp.orderDetail',
     'zamaszamaApp.orderList',
@@ -35,6 +39,9 @@ zamaszamaApp.factory('authInterceptor', function ($rootScope, $q, $window, $loca
             if (rejection.status === 401) {
                 // handle the case where the user is not authenticated
                 $location.url('/login');
+                $rootScope.welcome = '';
+                $rootScope.isAuthenticated = false;
+                delete $window.sessionStorage.token;
             }
             return $q.reject(rejection);
         }

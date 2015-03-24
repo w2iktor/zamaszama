@@ -16,15 +16,17 @@ zamaszamaApp.factory('UserFactory', function ($resource) {
 });
 
 
-zamaszamaApp.factory('OrdersFactory', function ($resource) {
-    return $resource('mocks/orders.json', {port: ':3000'}, {
+
+
+zamaszamaApp.factory('MealsFactory', function ($resource) {
+    return $resource('http://localhost:port/api/admin/meals', {port: ':3000'}, {
         query: { method: 'GET', isArray: true },
         create: { method: 'POST' }
     })
 });
 
-zamaszamaApp.factory('OrderFactory', function ($resource) {
-    return $resource('mocks/order.json', {port: ':3000'}, {
+zamaszamaApp.factory('MealFactory', function ($resource) {
+    return $resource('http://localhost:port/api/admin/meals/:mealId', {port: ':3000', mealId:'@mealId'}, {
         show: { method: 'GET', isArray: false },
         update: { method: 'PUT' },
         delete: { method: 'DELETE' }
