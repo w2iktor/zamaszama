@@ -157,6 +157,31 @@ paths:
             
   /admin/meals/{mealId}:
     x-swagger-router-controller: Meal
+    get:
+      operationId: readMeal
+      summary: Retrive all meals
+      description: Retrive all meals
+      parameters:
+        - name: mealId
+          in: path
+          type: string
+      responses:
+        200:
+          description: List of all meals
+          schema:
+            properties:
+              meals:
+                type: array
+                items:
+                  $ref: '#/definitions/Meal'
+                  minItems: 0
+                  uniqueItems: true
+                default:
+                  description: Unexpected error
+                  schema:
+                    $ref: '#/definitions/Error'
+      tags:
+        - Meals
     put:
       operationId: update
       summary: Update existing meal

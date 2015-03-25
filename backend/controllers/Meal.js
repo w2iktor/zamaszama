@@ -1,6 +1,13 @@
 var services = require('requirefrom')('services');
 var mealService = services('MealService');
 
+exports.readMeal = function(req, res, next){
+    var mealId = req.swagger.params.mealId.value;
+    mealService.read(mealId, function(err, meals){
+        sendRespond(res, err, meals);
+    });
+}
+
 exports.readAllMeals = function(req, res, next){
     mealService.readAll(function(err, meals){
         sendRespond(res, err, meals);
