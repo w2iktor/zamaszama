@@ -17,10 +17,6 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
                       var newMeal = {}
                       newMeal.amount = meal.amount;
                       newMeal.meal = meal._id;
-                      //newMeal.price = meal.price;
-                      //newMeal.type = meal.type;
-                      //newMeal.name = meal.name;
-                      //newMeal.company = meal.company;
                       choosenMeals.meals.push(newMeal);
                   }
               });
@@ -28,8 +24,13 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
           var jsonMeals = angular.toJson(choosenMeals, true);
           console.log(jsonMeals);
 
-          UserCurrentOrderFactory.create(jsonMeals, function () {
-          });
+          debugger;
+          if($scope.currentOrder._id == 0) {
+              UserCurrentOrderFactory.create(jsonMeals);
+          }
+          else {
+              UserCurrentOrderFactory.update(jsonMeals);
+          }
       };
 
       $scope.removeOrder = function () {
@@ -49,17 +50,16 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
             var savedCurrentOrder = UserCurrentOrderFactory.show(function(response){
                 if(savedCurrentOrder.message == "No order"){
                     $scope.currentOrder = {meals:[]}
+                    $scope.currentOrder._id=0;
                 }
                 else {
-                    //TODO : Verify if code below works when current order crud will be fixed
                     $scope.currentOrder = {meals:[]}
+                    $scope.currentOrder._id=savedCurrentOrder._id;
                     angular.forEach(savedCurrentOrder.meals, function(meal, key) {
                         if (meal.amount > 0) {
                             var newMeal = {}
 
-
-                            var fullMealInfo = $filter('filter')($scope.menu, {_id: meal._id})[0];
-
+                            var fullMealInfo = $filter('filter')($scope.menu, {_id: meal.meal})[0];
 
                             newMeal.amount = meal.amount;
                             newMeal._id = meal.meal;

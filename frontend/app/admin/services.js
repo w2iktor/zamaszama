@@ -15,9 +15,6 @@ zamaszamaApp.factory('UserFactory', function ($resource) {
     })
 });
 
-
-
-
 zamaszamaApp.factory('MealsFactory', function ($resource) {
     return $resource('http://localhost:port/api/admin/meals', {port: ':3000'}, {
         query: { method: 'GET', isArray: true },
