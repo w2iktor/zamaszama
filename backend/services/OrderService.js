@@ -78,6 +78,28 @@ function remove(userEmail,date, callback) {
     });
 };
 
+function getAggregatedSummary(date, callback) {
+    var formattedDate = dateUtils.toDate(date);
+
+    Order.mapReduce({map: summaryMap, reduce: summaryReduce}, function(err, res){
+        if(err) {
+            return callback(err);
+        }
+        callback(null, res);
+    });
+};
+
+function summaryMap(){
+    for(var idx = 0 ; idx < this.meals.length; idx++){
+        var key = this.meals[idx].meal;
+        var value = this.meals[idx].amount;
+        emit(key, value);
+    }
+};
+
+function summaryReduce(mealId, amount) {
+    return Array.sum(amount);
+};
 
 module.exports = {
     readAll: readAll,
@@ -85,5 +107,6 @@ module.exports = {
     read: read,
     create: create,
     update: update,
-    remove: remove
+    remove: remove,
+    getAggregatedSummary: getAggregatedSummary
 }

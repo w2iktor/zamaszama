@@ -38,6 +38,15 @@ exports.delete =  function(req, res, next) {
     });
 };
 
+exports.getAggregatedSummary =  function(req, res, next) {
+    var date = req.swagger.params.date.value;
+    service.getAggregatedSummary(
+        date,
+        function(err, data) {
+        sendRespond(res, err, data);
+    });
+};
+
 exports.lockOrder = function(req, res, next){
     lockService.create(new Date(), function(err, lock){
        sendRespond(res, err, lock);

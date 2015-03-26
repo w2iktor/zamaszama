@@ -576,8 +576,10 @@ paths:
               - User order
               - Admin
 
-  /admin/users/{date}/summary:
+  /admin/orders/{date}/summary:
+    x-swagger-router-controller: AdminOrder
     get:
+      operationId: getAggregatedSummary
       summary: Retrive summary of orders from specific date
       description: Retrive summary of orders for specific date. The orders will be aggregated by meal name and type in order to help order food via phone.
       parameters:
