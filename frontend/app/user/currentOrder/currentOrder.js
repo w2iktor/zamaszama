@@ -24,7 +24,6 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
           var jsonMeals = angular.toJson(choosenMeals, true);
           console.log(jsonMeals);
 
-          debugger;
           if($scope.currentOrder._id == 0) {
               UserCurrentOrderFactory.create(jsonMeals);
           }
