@@ -9,7 +9,7 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
       });
     }])
 
-.controller('UserCurrentOrderController', function ($scope, UserCurrentOrderFactory, MealsFactory, $filter, $location) {
+.controller('UserCurrentOrderController', function ($scope, UserCurrentOrderFactory, UserMealsFactory, $filter, $location) {
       $scope.sendOrder = function () {
           var choosenMeals = {meals:[]};
               angular.forEach($scope.currentOrder.meals, function(meal, key) {
@@ -24,7 +24,6 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
           var jsonMeals = angular.toJson(choosenMeals, true);
           console.log(jsonMeals);
 
-          debugger;
           if($scope.currentOrder._id == 0) {
               UserCurrentOrderFactory.create(jsonMeals);
           }
@@ -46,7 +45,7 @@ angular.module('zamaszamaApp.userCurrentOrder', ['ngRoute', 'ngResource'])
             list.splice( selectedMenuItem, 1 );
         };
 
-        $scope.menu = MealsFactory.query(function(){
+        $scope.menu = UserMealsFactory.query(function(){
             var savedCurrentOrder = UserCurrentOrderFactory.show(function(response){
                 if(savedCurrentOrder.message == "No order"){
                     $scope.currentOrder = {meals:[]}

@@ -14,3 +14,9 @@ zamaszamaApp.factory('UserCurrentOrderFactory', function ($resource) {
         update: { method: 'PUT', isArray: false }
     })
 });
+
+zamaszamaApp.factory('UserMealsFactory', function ($resource) {
+    return $resource('http://localhost:port/api/meals', {port: ':3000'}, {
+        query: { method: 'GET', isArray: true }
+    })
+});
