@@ -20,5 +20,5 @@ module.exports.toDate = function (val) {
     month = month < 10? '0' + month: month;
     var day = val.getDate();
     day = day < 10? '0' + day: day;
-    return val.getFullYear() + "/" + month + "/" + day;
+    return val.getFullYear() + "-" + month + "-" + day;
 }

@@ -1,5 +1,6 @@
 var services = require('requirefrom')('services');
 var service = services('OrderService');
+var lockService = services('LockService');
 
 exports.getByDate =  function(req, res, next) {
     var date = req.swagger.params.date.value;
@@ -37,6 +38,17 @@ exports.delete =  function(req, res, next) {
     });
 };
 
+exports.lockOrder = function(req, res, next){
+    lockService.create(new Date(), function(err, lock){
+       sendRespond(res, err, lock);
+    });
+};
+
+exports.unlockOrder = function(req, res, next){
+    lockService.remove(new Date(), function(err, lock){
+        sendRespond(res, err, lock);
+    });
+};
 
 function sendRespond(res, err, data){
     if(err){

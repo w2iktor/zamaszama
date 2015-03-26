@@ -636,15 +636,31 @@ paths:
               - User order
               - Admin
 
-  /admin/orders/lock:
+  /admin/currentOrder/lock:
+    x-swagger-router-controller: AdminOrder
     post:
-      operationId: ordersLock
+      operationId: lockOrder
       summary: Lock ordering food
       description: |
         This action will disallow to order food for current day. The purpose of this action is to disable food ordering when the order time is out.
       tags:
         - Admin
         - User order
+      responses:
+        200:
+          description: Successful request.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      operationId: unlockOrder
+      summary: Unlock ordering
+      description: |
+        Delete current user order if such exists.
+      tags:
+        - User order
+        - Admin
       responses:
         200:
           description: Successful request.

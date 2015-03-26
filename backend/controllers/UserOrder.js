@@ -1,5 +1,6 @@
 var services = require('requirefrom')('services');
 var service = services('OrderService');
+var lockService = services('LockService');
 
 exports.read =  function(req, res, next) {
     var email = req.user.email;
@@ -12,11 +13,18 @@ exports.read =  function(req, res, next) {
 
 exports.create =  function(req, res, next) {
     console.log('Receive request for create order: ');
+
     var order = req.swagger.params.order.value;
     order.userLogin = req.user.email;
     console.dir(order);
-    service.create(order, function(err, user) {
-        sendRespond(res, err, user);
+    lockService.read(new Date(), function(err, lockCounter){
+        if(lockCounter == 0){
+            service.create(order, function(err, user) {
+                sendRespond(res, err, user);
+            });
+        } else {
+            return sendRespond(res,err, {message: "Ordering is currently lock"});
+        }
     });
 };
 
@@ -25,16 +33,28 @@ exports.update=  function(req, res, next) {
     delete order.userLogin;
     delete order.date;
     var today = new Date();
-    service.update(req.user.email, today, order, function(err, user) {
-        sendRespond(res, err, user);
+    lockService.read(new Date(), function(err, lockCounter){
+        if(lockCounter == 0){
+            service.update(req.user.email, today, order, function(err, user) {
+                sendRespond(res, err, user);
+            });
+        } else {
+            return sendRespond(res,err, {message: "Ordering is currently lock"});
+        }
     });
 };
 
 exports.delete =  function(req, res, next) {
     var email = req.user.email;
     var today = new Date();
-    service.remove(email, today, function(err, user) {
-        sendRespond(res, err, "Current order for: " + email + " deleted successfully");
+    lockService.read(new Date(), function(err, lockCounter){
+        if(lockCounter == 0){
+            service.remove(email, today, function(err, deletedOrder) {
+                sendRespond(res, err, deletedOrder);
+            });
+        } else {
+            return sendRespond(res,err, {message: "Ordering is currently lock"});
+        }
     });
 };
 

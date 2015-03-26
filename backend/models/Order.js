@@ -38,11 +38,11 @@ var OrderSchema = new mongoose.Schema({
 //virtual.get(function () {now
 //    return dateUtils.toDate(this.date);
 //});
-
+// timezone offset :  - this.date.getTimezoneOffset() * 60000
 
 OrderSchema.pre('save', function (next) {
     if (this.isModified('date') || this.isNew) {
-        var date = new Date(this.date.getTime() - this.date.getTimezoneOffset() * 60000);
+        var date = new Date(this.date.getTime());
         this.bareDate = dateUtils.toDate(date);
         //console.log('Base date: ' + date);
         next();
