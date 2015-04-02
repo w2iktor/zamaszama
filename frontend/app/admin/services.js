@@ -29,3 +29,9 @@ zamaszamaApp.factory('MealFactory', function ($resource) {
         delete: { method: 'DELETE' }
     })
 });
+
+zamaszamaApp.factory('OrderSummaryFactory', function ($resource) {
+    return $resource('http://localhost:port/api/admin/orders/:orderDate/summary', {port: ':3000', orderDate:'@orderDate'}, {
+        show: { method: 'GET', isArray: false }
+    })
+});

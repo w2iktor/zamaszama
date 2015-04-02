@@ -16,6 +16,8 @@ var zamaszamaApp = angular.module('zamaszamaApp', [
     'zamaszamaApp.orderDetail',
     'zamaszamaApp.orderList',
 
+    'zamaszamaApp.orderSummary',
+
     'zamaszamaApp.version',
     'zamaszamaApp.login',
     'zamaszamaApp.passwordChange',
