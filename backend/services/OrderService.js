@@ -81,7 +81,7 @@ function remove(userEmail,date, callback) {
 function getAggregatedSummary(date, callback) {
     var formattedDate = dateUtils.toDate(date);
 
-    Order.mapReduce({map: summaryMap, reduce: summaryReduce}, function(err, res){
+    Order.mapReduce({map: summaryMap, reduce: summaryReduce, query: {bareDate: formattedDate}}, function(err, res){
         if(err) {
             return callback(err);
         }
