@@ -1,4 +1,6 @@
-var services = require('requirefrom')('services');
+var requireFrom = require('requirefrom');
+var respond = requireFrom('libs')('send_respond');
+var services = requireFrom('services');
 var service = services('OrderService');
 var lockService = services('LockService');
 
@@ -7,7 +9,7 @@ exports.read =  function(req, res, next) {
     var today = new Date();
     console.log('Receive request for user: ' + email + ' on: ' + today);
     service.read(email, today, function(err, data) {
-        sendRespond(res, err, data);
+        respond.sendRespond(res, err, data);
     });
 };
 
@@ -20,10 +22,10 @@ exports.create =  function(req, res, next) {
     lockService.read(new Date(), function(err, lockCounter){
         if(lockCounter == 0){
             service.create(order, function(err, user) {
-                sendRespond(res, err, user);
+                respond.sendRespond(res, err, user);
             });
         } else {
-            return sendRespond(res,err, {message: "Ordering is currently lock"});
+            return respond.sendRespond(res,err, {message: "Ordering is currently lock"});
         }
     });
 };
@@ -36,10 +38,10 @@ exports.update=  function(req, res, next) {
     lockService.read(new Date(), function(err, lockCounter){
         if(lockCounter == 0){
             service.update(req.user.email, today, order, function(err, user) {
-                sendRespond(res, err, user);
+                respond.sendRespond(res, err, user);
             });
         } else {
-            return sendRespond(res,err, {message: "Ordering is currently lock"});
+            return respond.sendRespond(res,err, {message: "Ordering is currently lock"});
         }
     });
 };
@@ -50,22 +52,10 @@ exports.delete =  function(req, res, next) {
     lockService.read(new Date(), function(err, lockCounter){
         if(lockCounter == 0){
             service.remove(email, today, function(err, deletedOrder) {
-                sendRespond(res, err, deletedOrder);
+                respond.sendRespond(res, err, deletedOrder);
             });
         } else {
-            return sendRespond(res,err, {message: "Ordering is currently lock"});
+            return respond.sendRespond(res,err, {message: "Ordering is currently lock"});
         }
     });
 };
-
-
-function sendRespond(res, err, data){
-    if(err){
-        throw new Error(err);
-    } else {
-        res.set("Content-type", "application/json; charset=utf-8")
-            .send(JSON.stringify(data, null, 2));
-        //res.json(data);
-    }
-}
-

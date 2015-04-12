@@ -3,7 +3,7 @@
 var log 		        	= require('../libs/log').getLogger(module);
 var _                       = require("lodash");
 var path                    = require('path');
-var authentication_utils                   = require("../libs/authentication_utils.js");
+var authentication_utils    = require("../libs/authentication_utils.js");
 var UnauthorizedAccessError = require(path.join(__dirname, "..", "errors", "UnauthorizedAccessError.js"));
 var mongoose                = require('mongoose');
 
