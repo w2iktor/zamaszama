@@ -60,3 +60,9 @@ exports.unlockOrder = function(req, res, next){
         respond.sendRespond(res, err, lock);
     });
 };
+
+exports.getLockOrder = function(req, res, next){
+    lockService.read(new Date(), function(err, lock){
+        respond.sendRespond(res, err, lock);
+    });
+};
