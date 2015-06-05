@@ -16,13 +16,28 @@ var OrderSchema = new mongoose.Schema({
     },
     meals: [{
         meal: {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: 'Meal'
+            company: {
+                type: String,
+                required: true
+            },
+            type: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true
+            }
         },
         amount: {
             type: Number,
             required: true
-        }
+        },
+        _id: false
     }],
     userLogin: {
         required: true,

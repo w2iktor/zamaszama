@@ -640,6 +640,21 @@ paths:
 
   /admin/currentOrder/lock:
     x-swagger-router-controller: AdminOrder
+    get:
+      operationId: getLockOrder
+      summary: Get lock
+      description: Retrive users current order
+      responses:
+        200:
+          description: User current order
+          schema:
+            $ref: '#/definitions/Order'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User order
     post:
       operationId: lockOrder
       summary: Lock ordering food
@@ -772,8 +787,8 @@ definitions:
       amount:
         type: number
       meal:
-        type: string
-        desription: Meal ID
+        $ref: '#/definitions/EmbeddedMeal'
+        desription: Meal
 
   Meal:
     properties:
@@ -792,6 +807,21 @@ definitions:
       _id:
         type: string
         description: Meal id
+
+  EmbeddedMeal:
+    properties:
+      type:
+        type: string
+        description: Type.
+      name:
+        type: string
+        description: Name.
+      price:
+        type: number
+        description: Meal price.
+      company:
+        type: string
+        description: Company.
 
   Error:
     properties:
